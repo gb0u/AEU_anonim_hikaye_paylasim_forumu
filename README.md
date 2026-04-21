@@ -84,7 +84,7 @@ start index.html   # Windows için
 - ✅ Hikayeler yalnızca **kullanıcının kendi tarayıcısında** (localStorage) saklanır
 - ✅ Sayfayı kapattığınızda veriler temizlenmez ancak **yalnızca o cihazda görünür**
 
-> ⚠️ **Not:** Gerçek bir çok-kullanıcılı forum için bir backend (Node.js, Firebase vb.) eklenmesi önerilir.
+> ⚠️ **Not:** Gerçek bir çok-kullanıcılı forum için bir backend (Node.js, Firebase vb.) eklenecektir.
 
 ---
 
