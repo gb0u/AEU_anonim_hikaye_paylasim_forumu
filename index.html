@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kırşehir Ahi Evran Anonim Hikaye Forumu</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-top">
+      <div class="logo-area">
+        <div class="logo-emblem">
+          <img src="img/logo.png" alt="Kırşehir Ahi Evran Üniversitesi Logo" width="54" height="54" />
+        </div>
+        <div class="logo-text">
+          <span class="logo-title">Kırşehir Ahi Evran Üniversitesi</span>
+          <span class="logo-subtitle">Anonim Hikaye Forumu</span>
+        </div>
+      </div>
+      <nav class="main-nav">
+        <a href="#" class="nav-link active" onclick="showSection('home')">Ana Sayfa</a>
+        <a href="#" class="nav-link" onclick="showSection('stories')">Hikayeler</a>
+        <a href="#" class="nav-link" onclick="showSection('share')">Hikaye Paylaş</a>
+        <a href="#" class="nav-link" onclick="showSection('about')">Hakkında</a>
+      </nav>
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+    </div>
+    <div class="header-banner">
+      <p>💬 Sesini duyur, kimliğin gizli kalsın — Her hikaye önemlidir.</p>
+    </div>
+  </header>
+
+  <!-- MOBILE NAV -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#" onclick="showSection('home'); toggleMobileMenu()">Ana Sayfa</a>
+    <a href="#" onclick="showSection('stories'); toggleMobileMenu()">Hikayeler</a>
+    <a href="#" onclick="showSection('share'); toggleMobileMenu()">Hikaye Paylaş</a>
+    <a href="#" onclick="showSection('about'); toggleMobileMenu()">Hakkında</a>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="container">
+
+    <!-- HOME SECTION -->
+    <section id="section-home" class="section active">
+      <div class="hero">
+        <div class="hero-content">
+          <h1>Sessiz Kalmak Zorunda Değilsin</h1>
+          <p>Deneyimlerini, duygularını ve hikayelerini anonim olarak paylaş. Burada yargı yok — sadece anlayış ve dayanışma var.</p>
+          <div class="hero-buttons">
+            <button class="btn-primary" onclick="showSection('share')">✍️ Hikaye Paylaş</button>
+            <button class="btn-secondary" onclick="showSection('stories')">📖 Hikayeleri Oku</button>
+          </div>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-card">
+            <span class="stat-number" id="storyCount">0</span>
+            <span class="stat-label">Paylaşılan Hikaye</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number" id="reactionCount">0</span>
+            <span class="stat-label">Verilen Tepki</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Anonim</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="categories-grid">
+        <h2 class="section-title">Kategoriler</h2>
+        <div class="categories">
+          <button class="category-btn" onclick="filterCategory('Ruh Sağlığı')">🧠 Ruh Sağlığı</button>
+          <button class="category-btn" onclick="filterCategory('Akademik Baskı')">📚 Akademik Baskı</button>
+          <button class="category-btn" onclick="filterCategory('Yalnızlık')">🌙 Yalnızlık</button>
+          <button class="category-btn" onclick="filterCategory('Aile')">👨‍👩‍👧 Aile</button>
+          <button class="category-btn" onclick="filterCategory('Sevgi & İlişkiler')">💙 Sevgi & İlişkiler</button>
+          <button class="category-btn" onclick="filterCategory('Kariyer Kaygısı')">🎯 Kariyer Kaygısı</button>
+          <button class="category-btn" onclick="filterCategory('Genel')">💬 Genel</button>
+        </div>
+      </div>
+
+      <div class="latest-stories">
+        <h2 class="section-title">Son Eklenen Hikayeler</h2>
+        <div id="home-stories-list"></div>
+      </div>
+    </section>
+
+    <!-- STORIES SECTION -->
+    <section id="section-stories" class="section">
+      <div class="stories-header">
+        <h2>Tüm Hikayeler</h2>
+        <div class="stories-controls">
+          <input type="text" id="searchBox" placeholder="🔍 Hikaye ara..." class="search-input" oninput="renderStories()" />
+          <select id="categoryFilter" class="filter-select" onchange="renderStories()">
+            <option value="">Tüm Kategoriler</option>
+            <option value="Ruh Sağlığı">🧠 Ruh Sağlığı</option>
+            <option value="Akademik Baskı">📚 Akademik Baskı</option>
+            <option value="Yalnızlık">🌙 Yalnızlık</option>
+            <option value="Aile">👨‍👩‍👧 Aile</option>
+            <option value="Sevgi & İlişkiler">💙 Sevgi & İlişkiler</option>
+            <option value="Kariyer Kaygısı">🎯 Kariyer Kaygısı</option>
+            <option value="Genel">💬 Genel</option>
+          </select>
+          <select id="sortFilter" class="filter-select" onchange="renderStories()">
+            <option value="newest">En Yeni</option>
+            <option value="mostLiked">En Çok Beğenilen</option>
+          </select>
+        </div>
+      </div>
+      <div id="stories-list"></div>
+    </section>
+
+    <!-- SHARE SECTION -->
+    <section id="section-share" class="section">
+      <div class="share-container">
+        <div class="share-info">
+          <h2>✍️ Hikayeni Paylaş</h2>
+          <p>Tüm hikayeler tamamen anonimdir. İsim, e-posta veya kimlik bilgisi istenmez. Sadece sesini duyur.</p>
+          <ul class="share-rules">
+            <li>✅ Gerçek deneyimlerini paylaş</li>
+            <li>✅ Saygılı ve anlayışlı bir dil kullan</li>
+            <li>❌ Başkalarını hedef alma veya küçümseme</li>
+            <li>❌ Kişisel bilgi (isim, numara) paylaşma</li>
+          </ul>
+          
+        </div>
+        <form class="story-form" onsubmit="submitStory(event)">
+          <div class="form-group">
+            <label>Takma Ad (İsteğe Bağlı)</label>
+            <input type="text" id="nickname" placeholder="Anonim, Yıldız, Umut..." maxlength="30" />
+          </div>
+          <div class="form-group">
+            <label>Kategori *</label>
+            <select id="storyCategory" required>
+              <option value="">Seç...</option>
+              <option value="Ruh Sağlığı">🧠 Ruh Sağlığı</option>
+              <option value="Akademik Baskı">📚 Akademik Baskı</option>
+              <option value="Yalnızlık">🌙 Yalnızlık</option>
+              <option value="Aile">👨‍👩‍👧 Aile</option>
+              <option value="Sevgi & İlişkiler">💙 Sevgi & İlişkiler</option>
+              <option value="Kariyer Kaygısı">🎯 Kariyer Kaygısı</option>
+              <option value="Genel">💬 Genel</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Başlık *</label>
+            <input type="text" id="storyTitle" placeholder="Hikayene bir başlık ver..." maxlength="80" required />
+          </div>
+          <div class="form-group">
+            <label>Hikayen *</label>
+            <textarea id="storyText" placeholder="Hikayeni buraya yaz... Minimum 50 karakter." rows="8" maxlength="2000" required oninput="updateCharCount()"></textarea>
+            <small class="char-count"><span id="charCount">0</span>/2000</small>
+          </div>
+          <div class="form-group">
+            <label>Ruh Halin</label>
+            <div class="mood-picker">
+              <button type="button" class="mood-btn" data-mood="😔" onclick="selectMood(this)">😔 Üzgün</button>
+              <button type="button" class="mood-btn" data-mood="😰" onclick="selectMood(this)">😰 Kaygılı</button>
+              <button type="button" class="mood-btn" data-mood="😤" onclick="selectMood(this)">😤 Sinirli</button>
+              <button type="button" class="mood-btn" data-mood="🙂" onclick="selectMood(this)">🙂 İyiyim</button>
+              <button type="button" class="mood-btn" data-mood="💪" onclick="selectMood(this)">💪 Güçlü</button>
+            </div>
+          </div>
+          <button type="submit" class="btn-primary submit-btn">Hikayemi Anonim Paylaş →</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- SURVEY SECTION -->
+    
+
+    <!-- ABOUT SECTION -->
+    <section id="section-about" class="section">
+      <div class="about-container">
+        <h2>Hakkında</h2>
+        <div class="about-grid">
+          <div class="about-card">
+            <div class="about-icon">🎯</div>
+            <h3>Proje Amacı</h3>
+            <p>Bu platform, Kırşehir Ahi Evran Üniversitesi öğrencilerinin ve genç bireylerin ruh sağlığı, sosyal baskı ve yaşam deneyimlerini anonim biçimde paylaşabilmeleri için oluşturulmuştur.</p>
+          </div>
+          <div class="about-card">
+            <div class="about-icon">🔒</div>
+            <h3>Gizlilik</h3>
+            <p>Hiçbir kişisel bilgi saklanmaz. Tüm hikayeler yerel olarak (tarayıcınızda) tutulur. Sunucuya herhangi bir veri gönderilmez.</p>
+          </div>
+          <div class="about-card">
+            <div class="about-icon">👤</div>
+            <h3>Yapımcı</h3>
+            <p><strong>Hamza Kahveci</strong><br/>Kırşehir Ahi Evran Üniversitesi Öğrencisi<br/>📧 <a href="mailto:kahveci.hamza@ogr.ahievran.edu.tr">kahveci.hamza@ogr.ahievran.edu.tr</a></p>
+          </div>
+        </div>
+        <div class="crisis-box">
+          <h3>🆘 Yardıma İhtiyacın mı Var?</h3>
+          <p>Zor bir dönemden geçiyorsan yalnız değilsin. Profesyonel destek almaktan çekinme.</p>
+          <div class="crisis-links">
+            <a href="tel:182" class="crisis-btn">📞 ALO 182 — Psikolojik Destek Hattı</a>
+            <a href="tel:156" class="crisis-btn">📞 ALO 156 — Acil Sosyal Destek</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- STORY MODAL -->
+  <div id="storyModal" class="modal" onclick="closeModal(event)">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- SUCCESS TOAST -->
+  <div id="toast" class="toast"></div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <img src="img/logo.png" alt="AEÜ Logo" width="38" height="38" style="border-radius:50%;" />
+        <span>Kırşehir Ahi Evran Üniversitesi</span>
+        <span class="footer-sub">Anonim Hikaye Forumu</span>
+      </div>
+      <div class="footer-links">
+        <a href="mailto:kahveci.hamza@ogr.ahievran.edu.tr">📧 İletişim</a>
+        
+      </div>
+      <div class="footer-copy">
+        <p>© 2026 Hamza Kahveci</p>
+        <p class="footer-disclaimer">
+          ⚠️ Bu site, Kırşehir Ahi Evran Üniversitesi'nin resmi platformu <strong>değildir</strong> ve üniversite ile herhangi bir kurumsal bağı ya da onayı bulunmamaktadır. Bireysel akademik amaçla geliştirilmiş bağımsız bir öğrenci projesidir.
+        </p>
+        <p style="font-size:0.72rem;opacity:0.55;margin-top:0.4rem;">Tüm hikayeler anonimdir ve yalnızca tarayıcınızda saklanır.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
